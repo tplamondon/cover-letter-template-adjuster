@@ -1,4 +1,4 @@
-name: Build cover-letter-template-adjuster
+name: Build win-x64
 
 on:
   push:
