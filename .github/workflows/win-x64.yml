@@ -1,5 +1,8 @@
 name: Build win-x64
 
+permissions:
+  contents: write
+
 on:
   push:
     tags:
