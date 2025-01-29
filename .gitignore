@@ -398,3 +398,5 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+cover-letter-template-adjuster/Tests/TEST1.docx
+cover-letter-template-adjuster/Tests/TEST2.docx

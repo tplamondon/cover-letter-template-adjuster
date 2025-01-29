@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "cover-letter-template-adjuster": {
+      "commandName": "Project",
+      "commandLineArgs": "-p ../../../Tests/TEST1 -c \"Happy Company\" -r \"Software Dev\""
+    }
+  }
+}
