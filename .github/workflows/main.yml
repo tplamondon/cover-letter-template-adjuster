@@ -1,0 +1,45 @@
+name: Build cover-letter-template-adjuster
+
+on:
+  push:
+    tags:
+      - "v*"  # Runs when pushing a tag like v1.0.0
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4  # Fetches your code
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'  # Change if using a different .NET version
+          
+      - name: Restore Dependencies
+        run: dotnet restore src/cover-letter-template-adjuster.sln  # Adjust path if needed
+
+      - name: Build Solution
+        run: dotnet build src/cover-letter-template-adjuster.sln --configuration Release --no-restore
+
+      - name: Publish with Visual Studio Publish Profile
+        run: dotnet publish src/cover-letter-template-adjuster.csproj --configuration Release /p:PublishProfile=win-x64
+
+      - name: Get Version from Tag
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+      - name: Zip Published Files
+        run: Compress-Archive -Path src/bin/Release/net8.0/publish/* -DestinationPath cover-letter-template-adjuster-${{ env.VERSION }}.zip
+
+      - name: Create GitHub Release and Upload Files
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ env.VERSION }}
+          files: cover-letter-template-adjuster-${{ env.VERSION }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
