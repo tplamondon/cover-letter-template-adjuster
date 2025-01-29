@@ -48,7 +48,16 @@ namespace cover_letter_template_adjuster
             }
 
             using WordprocessingDocument document = WordprocessingDocument.Open(coverLetterFile, true);
-            ProcessDocument(document, options.CompanyName, options.RoleName);
+            try
+            {
+                ProcessDocument(document, options.CompanyName, options.RoleName);
+                Console.WriteLine("Successfully created new cover letter from template");
+            }
+            catch (FileFormatException e)
+            {
+                Console.Error.WriteLine($"Unexpected Error. {e.Message}");
+            }
+            
         }
 
         internal static string TryCreateCoverLetterFile(Options options)
@@ -71,8 +80,7 @@ namespace cover_letter_template_adjuster
             var documentBody = document.MainDocumentPart?.Document.Body;
             if (documentBody == null)
             {
-                Console.Error.WriteLine("Unexpected Error processing document body. Was null");
-                return;
+                throw new FileFormatException("Unexpected Error processing document body. Was null");
             }
             var paragraphs = documentBody.Elements<Paragraph>();
 
