@@ -6,6 +6,7 @@
     <RootNamespace>cover_letter_template_adjuster</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AssemblyName>clt</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

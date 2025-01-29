@@ -32,7 +32,7 @@ jobs:
         run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
 
       - name: Zip Published Files
-        run: Compress-Archive -Path src/bin/Release/net8.0/publish/* -DestinationPath cover-letter-template-adjuster-${{ env.VERSION }}.zip
+        run: Compress-Archive -Path src/publish/* -DestinationPath clt-${{ env.VERSION }}.zip
 
       - name: Create GitHub Release and Upload Files
         uses: softprops/action-gh-release@v1
