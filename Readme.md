@@ -17,3 +17,8 @@ These are the following arguments
 
 # Building/Running this program yourself
 I used Visual Studio 2022 to develop this using .NET 8.0. I think you can just pull the repository and open the project.
+
+
+# TODO
+
+Figure out why the zip files on githubs auto actions aren't getting named properly based on the tag name
